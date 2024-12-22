@@ -1,0 +1,29 @@
+export async function getGeners () {
+  const response = await fetch(
+    `${import.meta.env.VITE_API_BASE_URL}genres?key=${
+      import.meta.env.VITE_API_KEY
+    }`
+  )
+  const json = await response.json()
+  return json.results
+}
+
+export async function getPlaforms () {
+  const response = await fetch(
+    `${import.meta.env.VITE_API_BASE_URL}platforms?key=${
+      import.meta.env.VITE_API_KEY
+    }`
+  )
+  const json = await response.json()
+  return json.results
+}
+
+export async function preLoadedFilters() {
+      const genres = await getGeners();
+      const platforms = await getPlaforms();
+
+      return {
+            genres,
+            platforms,
+      }
+}

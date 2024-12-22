@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.navbar > header {
+      max-width: 100%;
+}
+.card{
+      animation: fadeIn 2s;
+}
+
+@keyframes fadeIn {
+      from {
+            opacity: 0;
+      }
+      to {
+            opacity: 1;
+      }
+}
+
+
