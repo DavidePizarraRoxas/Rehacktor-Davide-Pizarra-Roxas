@@ -1,5 +1,6 @@
-import { Card, CardFooter, Button, Image } from "@nextui-org/react"
+import { Card, CardFooter, Button } from "@nextui-org/react"
 import GameImage from "./components/GameImage"
+import { Link } from "react-router"
 export default function GameUI({ game }) {
 
       const { background_image: image } = game
@@ -14,9 +15,12 @@ export default function GameUI({ game }) {
                                     <p className="text-medium ">{game.name}</p>
                               </div>
                         </div>
-                        <Button radius="full" size="sm" color="primary">
-                              Get App
-                        </Button>
+
+                        <Link to={`/game/${game.id}`}>
+                              <Button radius="full" size="sm" color="primary">
+                                    Details
+                              </Button>
+                        </Link>
                   </CardFooter>
             </Card>
       )
