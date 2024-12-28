@@ -41,27 +41,30 @@ export default function Navabar() {
 
 
       return (
-            <Navbar shouldHideOnScroll isBordered className="navbar">
+            <Navbar shouldHideOnScroll isBordered className="navbar p-2">
                   <NavbarBrand>
                         <Link to={`/`}>
-                              <h1 className="font-bold text-inherit">Reahcktor</h1>
+                              <h1 className=" text-4xl font-bold text-inherit">Reahacktor</h1>
                         </Link>
                   </NavbarBrand>
                   <NavbarContent className="hidden lg:flex gap-4 w-[50%]" justify="center">
-                        <ModalNav/>
+                        <ModalNav />
                   </NavbarContent>
                   <NavbarContent justify="end">
                         <NavbarItem className="hidden lg:flex">
-                              <Button color="primary" href="#" variant="flat">
-                                    Login
-                              </Button>
+                              <Link to={`/singin`}>
+                                    <Button color="primary" href="#" variant="flat">
+                                          Login
+                                    </Button>
+                              </Link>
 
                         </NavbarItem>
-
                         <NavbarItem>
-                              <Button color="primary" href="#" variant="flat">
-                                    Sign Up
-                              </Button>
+                              <Link to={`/singup`}>
+                                    <Button color="primary" href="#" variant="flat">
+                                          Sign Up
+                                    </Button>
+                              </Link>
                         </NavbarItem>
                   </NavbarContent>
             </Navbar>

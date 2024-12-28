@@ -1,5 +1,8 @@
+import { useEffect, useState } from "react";
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Input } from "@nextui-org/react";
 import AutoCompleteCard from "../AutoCompleteCardUI";
+import ProgressBar from "../Progress/ProgressBar";
+
 
 export const SearchIcon = ({ size = 24, strokeWidth = 1.5, width, height, ...props }) => {
       return (
@@ -31,35 +34,63 @@ export const SearchIcon = ({ size = 24, strokeWidth = 1.5, width, height, ...pro
       );
 };
 export default function ModalNav() {
+      const [search, setSearch] = useState('');
+      const [games, setGames] = useState([]);
+      const [loading, setLoading] = useState(false);
       const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
+
+      useEffect(() => {
+            const timeputAPI = setTimeout(() => {
+                  async function fetchSearchedGames() {
+                        if (!search) return;
+                        setLoading(true)
+                        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}games?key=${import.meta.env.VITE_API_KEY}&page=1&search=${search}`);
+                        const json = await response.json();
+                        setGames(json.results);
+                        setLoading(false)
+                  }
+                  fetchSearchedGames();
+            }, 2000);
+
+            return () => {
+                  clearTimeout(timeputAPI);
+            }
+      }, [search])
 
       return (
             <>
-                  <Button onPress={onOpen} className="w-full"  startContent={<SearchIcon size={18} />}>Search your game</Button>
-                  <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="lg" backdrop="blur">
-                        <ModalContent className=" bg-zinc-800">
+                  <Button onPress={onOpen} className="w-full" startContent={<SearchIcon size={18} />}>Search your game</Button>
+                  <Modal isOpen={isOpen} onOpenChange={onOpenChange} scrollBehavior="outside" size="lg" backdrop="blur">
+                        <ModalContent className=" bg-zinc-800 ">
                               {(onClose) => (
                                     <>
                                           <ModalHeader className="flex flex-col gap-1 text-white"><span className="text-2xl">Search your game</span></ModalHeader>
-                                          <ModalBody>
+                                          <ModalBody className="h-[10rem]">
                                                 <Input
                                                       classNames={{
-
                                                             base: "max-w-full  h-10",
                                                             mainWrapper: "h-full",
                                                             input: "text-small",
                                                             inputWrapper:
-                                                                  "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
-
+                                                                  "h-full font-normal   "
                                                       }}
 
                                                       placeholder="Search..."
                                                       size="sm"
                                                       startContent={<SearchIcon size={18} />}
                                                       type="search"
-                                                />
+                                                      value={search}
+                                                      onChange={(event) => setSearch(event.target.value)}
 
-                                                <AutoCompleteCard/>
+                                                />
+                                                <div className="max-h-[30vh] overflow-y-auto">
+                                                      {loading && <ProgressBar />}
+                                                      {games && games.map(game => (
+                                                            <AutoCompleteCard key={game.id} game={game} />
+                                                      ))}
+                                                </div>
+
                                           </ModalBody>
                                           <ModalFooter>
                                                 <Button color="danger" variant="light" onPress={onClose}>
@@ -73,6 +104,7 @@ export default function ModalNav() {
                               )}
                         </ModalContent>
                   </Modal>
+
             </>
       );
 }
