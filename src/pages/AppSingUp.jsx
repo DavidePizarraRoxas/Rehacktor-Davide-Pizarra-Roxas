@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { Form, Input, Button } from "@nextui-org/react";
+import supabase from "../supabase/client";
+import { Toaster, toast } from 'sonner';
+import { useNavigate } from "react-router";
 
 
 export const MailIcon = (props) => {
@@ -56,7 +59,6 @@ export const EyeSlashFilledIcon = (props) => {
             </svg>
       );
 };
-
 export const EyeFilledIcon = (props) => {
       return (
             <svg
@@ -84,50 +86,88 @@ export const EyeFilledIcon = (props) => {
 
 export default function AppSingUp() {
 
+
       const [isVisible, setIsVisible] = useState(false);
       const toggleVisibility = () => setIsVisible(!isVisible);
+      const navigate = useNavigate();
+
+
+      const hundleSubmission = async (event) => {
+            event.preventDefault();
+            const formRegister = event.currentTarget;
+            const { email, password, username, first_name, last_name } = Object.fromEntries(new FormData(formRegister))
+            console.log({ email, password, username, first_name, last_name });
+
+            // Insert in supabase
+            try {
+                  const { error } = await supabase.auth.signUp({
+                        email,
+                        password,
+                        options: {
+                              data: {
+                                    username,
+                                    first_name,
+                                    last_name,
+                              },
+                        },
+                  })
+                  if (error) {
+                        toast.error('Signed Up Failed!!')
+                  } else {
+                        toast.success('Signed Up Success')
+                        await new Promise((resolve) => setTimeout(resolve, 1000))
+                        formRegister.reset();
+                        navigate('/');
+                  }
+            } catch (error) {
+                  alert(error)
+            }
+      }
       return (
             <>
-            <h1 className=" text-center text-6xl font-bold mt-6 mb-6">
-                  Register
-            </h1>
-                  <div className=" flex justify-center ">
-
-                        <Form className="grid grid-cols-2 items-center w-[75%] mt-5 shadow-lg shadow-white rounded-md" validationBehavior="native"  >
+                  <h1 className=" text-center text-6xl font-bold mt-6 mb-2">
+                        Register
+                  </h1>
+                  <div className=" flex justify-center p-5">
+                        <Form className="grid grid-cols-2 items-center w-[75%] mt-5 shadow-lg shadow-white rounded-md" validationBehavior="native" onSubmit={hundleSubmission} >
+                              {/* Immagine */}
                               <div className="  ">
-                                    <img src="/SingUp.jpeg" alt="" className="object-cover rounded-s-md  " />
+                                    <img src="/SingUp.jpeg" alt="" className="object-cover rounded-s-md" />
                               </div>
+                              {/* Input */}
                               <div className="ps-24 pe-24  ">
                                     <Input
                                           className="mb-5 "
                                           isRequired
-                                          errorMessage="Please enter a valid email"
+                                          errorMessage="Please enter a valid username"
                                           labelPlacement="outside"
-                                          name="email"
-                                          placeholder="Enter your email"
-                                          type="email"
+                                          name="username"
+                                          placeholder="Enter your username"
+                                          type="text"
                                           startContent={
                                                 <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
                                           }
-                                    /> <Input
+                                    />
+                                    <Input
                                           className="mb-5 "
                                           isRequired
-                                          errorMessage="Please enter a valid email"
+                                          errorMessage="Please enter a valid first name"
                                           labelPlacement="outside"
-                                          name="email"
-                                          placeholder="Enter your email"
-                                          type="email"
+                                          name="first_name"
+                                          placeholder="Enter your first name"
+                                          type="text"
                                           startContent={
                                                 <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
                                           }
-                                    /> <Input
+                                    />
+                                    <Input
                                           className="mb-5 "
                                           isRequired
-                                          errorMessage="Please enter a valid email"
+                                          errorMessage="Please enter a valid last name"
                                           labelPlacement="outside"
-                                          name="email"
-                                          placeholder="Enter your email"
-                                          type="email"
+                                          name="last_name"
+                                          placeholder="Enter your last name"
+                                          type="text"
                                           startContent={
                                                 <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
                                           }
@@ -145,7 +185,8 @@ export default function AppSingUp() {
                                           }
                                     />
                                     <Input
-                                          className="mb-2  "
+                                          className="mb-2"
+                                          name="password"
                                           endContent={
                                                 <button
                                                       aria-label="toggle password visibility"
@@ -169,15 +210,11 @@ export default function AppSingUp() {
                                           <Button type="submit" variant="bordered" color="primary">
                                                 Register
                                           </Button>
-
+                                          <Toaster richColors />
                                     </div>
                               </div>
                         </Form>
                   </div>
             </>
-
-
-
-
       )
 }

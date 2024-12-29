@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { Form, Input, Button } from "@nextui-org/react";
+import supabase from "../supabase/client";
+import { Toaster, toast } from 'sonner';
+import { useNavigate } from "react-router";
 
 
 export const MailIcon = (props) => {
@@ -86,15 +89,41 @@ export default function AppSingIn() {
 
       const [isVisible, setIsVisible] = useState(false);
       const toggleVisibility = () => setIsVisible(!isVisible);
+      const navigate = useNavigate();
+
+      const hundleSignIn = async (event) => {
+            event.preventDefault();
+            const formRegister = event.currentTarget;
+            const { email, password } = Object.fromEntries(new FormData(formRegister))
+            // Insert in supabase
+            try {
+                  const { error } = await supabase.auth.signInWithPassword({
+                        email,
+                        password,
+                  })
+                  if (error) {
+                        toast.error('Signed In Failed!!')
+                  } else {
+                        toast.success('Signed In Success')
+                        await new Promise((resolve) => setTimeout(resolve, 1000))
+                        formRegister.reset();
+                        navigate('/');
+                  }
+            } catch (error) {
+                  alert(error)
+
+            }
+      }
+
       return (
 
             <>
-                  <h1 className=" text-center text-6xl font-bold mt-6 mb-6">
+                  <h1 className=" text-center text-6xl font-bold mt-6 mb-2">
                         Login
                   </h1>
-                  <div className=" flex justify-center ">
+                  <div className=" flex justify-center p-5 ">
 
-                        <Form className="grid grid-cols-2 items-center w-[75%] mt-5  shadow-lg shadow-white rounded-md" validationBehavior="native"  >
+                        <Form className="grid grid-cols-2 items-center w-[75%] mt-5  shadow-lg shadow-white rounded-md" validationBehavior="native" onSubmit={hundleSignIn}  >
                               <div className="ps-24 pe-24  ">
 
                                     <Input
@@ -110,7 +139,8 @@ export default function AppSingIn() {
                                           }
                                     />
                                     <Input
-                                          className="mb-2  "
+                                          className="mb-2"
+                                          name="password"
                                           endContent={
                                                 <button
                                                       aria-label="toggle password visibility"
@@ -134,6 +164,7 @@ export default function AppSingIn() {
                                           <Button type="submit" variant="bordered" color="primary">
                                                 Log-In
                                           </Button>
+                                          <Toaster richColors />
 
                                     </div>
                               </div>

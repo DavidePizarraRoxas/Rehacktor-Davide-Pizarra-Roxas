@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useAsyncList } from 'react-stately'
 import { useInView } from "react-intersection-observer";
 import { Spinner } from "@nextui-org/react";
@@ -9,6 +9,8 @@ import DropdownMain from "../components/NavbarUI/DropDown/DropDownMain";
 export default function AppHome() {
 
       const [loading, setLoading] = useState(false)
+
+
 
 
       let games = useAsyncList({

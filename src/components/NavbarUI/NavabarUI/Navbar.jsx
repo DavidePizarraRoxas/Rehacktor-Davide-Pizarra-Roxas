@@ -1,10 +1,10 @@
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Button, Input } from "@nextui-org/react";
-import { useState } from "react";
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Button, alert, } from "@nextui-org/react";
 import { Link } from "react-router";
 import ModalNav from "../ModalUI/ModaNav";
 
-
-
+import { useContext } from "react";
+import SessionContext from "../../../context/SessionContext";
+import DropDownNavBar from "../DropDown/DropDownNavBar";
 
 export const SearchIcon = ({ size = 24, strokeWidth = 1.5, width, height, ...props }) => {
       return (
@@ -39,6 +39,8 @@ export const SearchIcon = ({ size = 24, strokeWidth = 1.5, width, height, ...pro
 
 export default function Navabar() {
 
+      const session = useContext(SessionContext)
+
 
       return (
             <Navbar shouldHideOnScroll isBordered className="navbar p-2">
@@ -51,22 +53,33 @@ export default function Navabar() {
                         <ModalNav />
                   </NavbarContent>
                   <NavbarContent justify="end">
-                        <NavbarItem className="hidden lg:flex">
-                              <Link to={`/singin`}>
-                                    <Button color="primary" href="#" variant="flat">
-                                          Login
-                                    </Button>
-                              </Link>
 
-                        </NavbarItem>
-                        <NavbarItem>
-                              <Link to={`/singup`}>
-                                    <Button color="primary" href="#" variant="flat">
-                                          Sign Up
-                                    </Button>
-                              </Link>
-                        </NavbarItem>
+                        {session ? (
+                              <NavbarItem >
+                                    <DropDownNavBar />
+                              </NavbarItem>
+                        ) : (
+                              <>
+                                    < NavbarItem className="hidden lg:flex">
+                                          <Link to={`/singin`}>
+                                                <Button color="primary" href="#" variant="flat">
+                                                      Login
+                                                </Button>
+                                          </Link>
+
+                                    </NavbarItem>
+                                    <NavbarItem>
+                                          <Link to={`/singup`}>
+                                                <Button color="primary" href="#" variant="flat">
+                                                      Sign Up
+                                                </Button>
+                                          </Link>
+                                    </NavbarItem>
+                              </>
+
+                        )}
+
                   </NavbarContent>
-            </Navbar>
+            </Navbar >
       )
 }
