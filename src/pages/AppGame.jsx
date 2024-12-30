@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router"
 import ProgressBar from "../components/NavbarUI/Progress/ProgressBar";
 import { Image, Button } from "@nextui-org/react";
+import SessionContext from "../context/SessionContext";
 
 export const HeartIcon = ({ fill = "currentColor", filled, size, height, width, ...props }) => {
       return (
@@ -26,6 +27,8 @@ export const HeartIcon = ({ fill = "currentColor", filled, size, height, width, 
 
 export default function AppGame() {
 
+
+      const session = useContext(SessionContext);
       const { id } = useParams();
       const [game, setGame] = useState({});
       const [loading, setLoading] = useState();
@@ -59,10 +62,6 @@ export default function AppGame() {
 
                               <div className=" flex items-center">
 
-
-
-
-
                                     <h3>{game.description_raw}</h3>
 
                               </div>
@@ -78,7 +77,7 @@ export default function AppGame() {
                                           />
 
                                     </div>
-
+                                    {session &&
                                     <div className="flex gap-4 items-center justify-center mt-7 ">
                                           <Button isIconOnly aria-label="Like" color="danger">
                                                 <HeartIcon />
@@ -88,7 +87,8 @@ export default function AppGame() {
                                                       Your reviews
                                                 </p>
                                           </Button>
-                                    </div>
+                                    </div> }
+
                               </div>
 
                         </div>

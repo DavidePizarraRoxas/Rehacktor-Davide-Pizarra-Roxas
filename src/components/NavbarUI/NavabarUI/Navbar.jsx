@@ -1,10 +1,10 @@
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Button, alert, } from "@nextui-org/react";
 import { Link } from "react-router";
 import ModalNav from "../ModalUI/ModaNav";
-
 import { useContext } from "react";
 import SessionContext from "../../../context/SessionContext";
 import DropDownNavBar from "../DropDown/DropDownNavBar";
+
 
 export const SearchIcon = ({ size = 24, strokeWidth = 1.5, width, height, ...props }) => {
       return (
