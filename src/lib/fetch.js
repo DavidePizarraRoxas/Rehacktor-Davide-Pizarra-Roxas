@@ -18,12 +18,22 @@ export async function getPlaforms () {
   return json.results
 }
 
-export async function preLoadedFilters() {
-      const genres = await getGeners();
-      const platforms = await getPlaforms();
+export async function preLoadedFilters () {
+  const genres = await getGeners()
+  const platforms = await getPlaforms()
 
-      return {
-            genres,
-            platforms,
-      }
+  return {
+    genres,
+    platforms
+  }
+}
+
+export async function fetchGame ({ params }) {
+  const response = await fetch(
+    `${import.meta.env.VITE_API_BASE_URL}games/${params.id}?key=${
+      import.meta.env.VITE_API_KEY
+    }`
+  )
+  const json = await response.json()
+  return json
 }

@@ -15,6 +15,7 @@ export function UseProfile() {
       useEffect(() => {
             let ignore = false
             async function getProfile() {
+                  if (!session) return;
                   setLoading(true)
                   const { user } = session
 

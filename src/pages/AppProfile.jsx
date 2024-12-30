@@ -1,6 +1,10 @@
-import { Card, CardBody, Image, CardHeader, Accordion, AccordionItem } from "@nextui-org/react";
+import { Card, CardBody, Image, CardHeader, Accordion, AccordionItem, Divider } from "@nextui-org/react";
 import { UseProfile } from "../hooks/UseProfile";
 import { getAvatarUrl } from "../utils/getAvatarUrl";
+import supabase from "../supabase/client";
+import { useContext, useEffect, useState } from "react";
+import SessionContext from "../context/SessionContext";
+
 
 
 export const HeartIcon = ({ fill = "currentColor", filled, size, height, width, ...props }) => {
@@ -27,6 +31,26 @@ export const HeartIcon = ({ fill = "currentColor", filled, size, height, width, 
 export default function AppProfile() {
 
       const { username, first_name, last_name, avatar_url } = UseProfile();
+      const session = useContext(SessionContext);
+
+      const [fav, setFav] = useState([])
+      async function readFav() {
+            const { user } = session
+            let { data: favourites, error } = await supabase
+                  .from('favourites')
+                  .select(`*`)
+                  .eq('profile_id', user.id)
+
+            if (error) {
+                  console.log(error);
+            }
+            setFav(favourites)
+      }
+      useEffect(() => {
+            readFav();
+      }, [])
+
+
 
       return (
 
@@ -42,16 +66,18 @@ export default function AppProfile() {
                         </CardHeader>
                         <CardBody>
                               <div className="grid grid-cols-2 md:grid-cols-12 items-center justify-center">
-                                    <div className="relative col-span-6 md:col-span-4 p-4">
-                                          <Image
-                                                alt="Image profile"
-                                                className="object-cover"
-                                                shadow="md"
-                                                src={ avatar_url && getAvatarUrl(avatar_url)}
-                                                width="300px"
-                                                height='300px'
+                                    <div className="relative col-span-6 md:col-span-4 p-4 ">
+                                          <div className=" flex justify-center">
+                                                <Image
+                                                      alt="Image profile"
+                                                      className="object-cover"
+                                                      shadow="md"
+                                                      src={avatar_url && getAvatarUrl(avatar_url)}
+                                                      width="300px"
+                                                      height='300px'
 
-                                          />
+                                                />
+                                          </div>
                                           <div className="mt-5 flex gap-2 justify-center">
                                                 <h2 className=" font-bold mb-2 text-xl">{first_name}</h2>
                                                 <h2 className=" font-bold text-xl">{last_name}</h2>
@@ -61,7 +87,22 @@ export default function AppProfile() {
                                     <div className=" ms-10 col-span-7 ">
 
                                           <Accordion variant="splitted">
-                                                <AccordionItem startContent={<HeartIcon className=" text-red-800" />} aria-label="Accordion 1" title="Favourite games">
+                                                <AccordionItem startContent={<HeartIcon className=" text-red-800 " />} aria-label="Accordion 1" title="Favourite games">
+                                                      <div className="max-h-[20vh] overflow-y-auto p-5">
+                                                            {fav ? (
+                                                                  <ul>
+                                                                        {fav.map(fav => (
+                                                                              <>
+                                                                                    <li key={fav.id}>{fav.game_name}</li>
+                                                                                    <Divider className="my-2" />
+                                                                              </>
+                                                                        ))}
+                                                                  </ul>
+                                                            ) : (
+                                                                  <p>No favourites found.</p>
+                                                            )}
+
+                                                      </div>
 
                                                 </AccordionItem>
                                                 <AccordionItem key="2" aria-label="Accordion 2" title="Your review">

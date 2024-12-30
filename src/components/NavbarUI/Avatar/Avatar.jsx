@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import supabase from "../../../supabase/client";
-import { Input } from "@nextui-org/react";
+
 
 export default function Avatar({ url, size, onUpload }) {
       const [avatarUrl, setAvatarUrl] = useState(null)

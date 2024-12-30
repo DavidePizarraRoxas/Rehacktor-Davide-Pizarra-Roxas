@@ -138,13 +138,14 @@ export default function AppAccount() {
                         Update your Profile
                   </h1>
                   <div className=" flex justify-center p-5 mt-10">
-                        <Form className=" flex justify-center items-center w-[60%] h-[700px] bborder border-default-200 bg-gradient-to-br from-white to-default-200 dark:from-default-50 dark:to-black shadow-md shadow-white rounded-lg  " validationBehavior="native" onSubmit={updateProfile} >
+                        <Form className=" flex justify-center items-center w-[60%] h-[790px] bborder border-default-200 bg-gradient-to-br from-white to-default-200 dark:from-default-50 dark:to-black shadow-md shadow-white rounded-lg  " validationBehavior="native" onSubmit={updateProfile} >
                               {/* Input */}
                               <div className="ps-24 pe-24  w-[57%] ">
-                                    <div className=' flex justify-center'>
+                                    <div className=' flex justify-center mt-6 '>
                                           <Avatar
                                                 url={avatar_url}
-                                                size={260}
+                                                size={320}
+
                                                 onUpload={(event, url) => {
                                                       updateProfile(event, url)
                                                 }}

@@ -1,8 +1,8 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import { Form, Input, Button } from "@nextui-org/react";
 import supabase from "../supabase/client";
 import { Toaster, toast } from 'sonner';
-import { useNavigate } from "react-router";
 
 
 export const MailIcon = (props) => {
