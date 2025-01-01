@@ -4,7 +4,7 @@ import { Link, useLoaderData } from "react-router";
 export default function DropDownsPlatforms() {
       const { platforms } = useLoaderData();
 
-     
+
 
       return (
             <Dropdown backdrop="blur" className=" bg-zinc-800 dropdown">

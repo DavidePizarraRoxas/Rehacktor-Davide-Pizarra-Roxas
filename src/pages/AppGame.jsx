@@ -1,10 +1,12 @@
 import { useContext, useEffect, useState } from "react";
-import { useLoaderData, useParams } from "react-router"
-import ProgressBar from "../components/NavbarUI/Progress/ProgressBar";
-import { Image, Button } from "@nextui-org/react";
-import SessionContext from "../context/SessionContext";
+import { useLoaderData } from "react-router"
+import { Image, Button, Form, Input } from "@nextui-org/react";
 import supabase from "../supabase/client";
+import SessionContext from "../context/SessionContext";
 import { Toaster, toast } from 'sonner';
+import ProgressBar from "../components/NavbarUI/Progress/ProgressBar";
+import RealtimeChat from "../components/NavbarUI/RealtimeChatUI";
+
 
 export const HeartIcon = ({ fill = "currentColor", filled, size, height, width, ...props }) => {
       return (
@@ -70,7 +72,7 @@ export default function AppGame() {
             let { data: favourites, error } = await supabase
                   .from('favourites')
                   .select(`*`)
-                  .eq('profile_id', user.id)
+                  .eq('profile_id', session.user.id)
                   .eq('game_id', game.id)
             if (error) {
                   console.log(error);
@@ -107,6 +109,35 @@ export default function AppGame() {
             }
 
       }
+      async function handleMessageSubmit(event) {
+            event.preventDefault();
+            const inputMessage = event.currentTarget;
+            const { message } = Object.fromEntries(new FormData(inputMessage));
+            // Sanitize input
+            if (typeof message === 'string' && message.trim().length !== 0) {
+
+                  const { data, error } = await supabase
+                        .from('Messages')
+                        .insert([
+                              {
+                                    profile_id: session.user.id,
+                                    profile_username: session.user.user_metadata.username,
+                                    game_id: game.id,
+                                    content: message,
+                              },
+                        ])
+                        .select()
+                  if (error) {
+                        toast.error('Message Failed!!')
+                  } else {
+                        toast.success(' Message Sent')
+                        inputMessage.reset();
+                        console.log(data);
+
+                  }
+            }
+
+      }
 
       useEffect(() => {
             readFav();
@@ -121,7 +152,7 @@ export default function AppGame() {
                               {loading && <ProgressBar />}
                         </div>
                         <div className=" grid grid-cols-2 ms-40">
-                              <div className=" flex items-center">
+                              <div className=" flex">
                                     <h3>{game.description_raw}</h3>
                               </div>
                               <div className="  ">
@@ -140,7 +171,7 @@ export default function AppGame() {
                                                             <Button aria-label="Like" color="danger" variant="bordered" startContent={<HeartIcon className=" text-danger-500" />} onPress={() => insertIntoFav(game)}>
                                                                   Add favourite
                                                             </Button> :
-                                                            <Button aria-label="Like" variant="bordered" startContent={<DeleteDocumentIcon />} onPress={() => removeFromFav(game) }>
+                                                            <Button aria-label="Like" variant="bordered" startContent={<DeleteDocumentIcon />} onPress={() => removeFromFav(game)}>
                                                                   Remove from favorites
                                                             </Button>
                                                       }
@@ -152,6 +183,33 @@ export default function AppGame() {
                                                       </p>
                                                 </Button>
                                           </div>}
+
+                                    {session &&
+                                          <div className=" flex justify-center p-4">
+                                                <RealtimeChat game={game}  />
+                                          </div>}
+
+                                    {session &&
+                                          <div className="p-4">
+                                                <Form className="" validationBehavior="native" onSubmit={handleMessageSubmit}>
+                                                      <div className="flex w-full gap-2 ">
+                                                            <Input
+                                                                  label="Live chat with other gamers"
+                                                                  labelPlacement="outside"
+                                                                  name="message"
+                                                                  placeholder="Chat..."
+                                                                  type="text"
+                                                                  aria-label="message"
+                                                            />
+                                                            <Button color="primary" type="submit" aria-label="Submit" className=" mt-6" >
+                                                                  Send
+                                                            </Button>
+                                                            <Toaster richColors />
+                                                      </div>
+                                                </Form>
+                                          </div>
+                                    }
+
 
                               </div>
 

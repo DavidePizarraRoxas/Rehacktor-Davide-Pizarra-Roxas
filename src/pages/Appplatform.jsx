@@ -14,13 +14,12 @@ export default function AppPlatform() {
             async function fetchPlatformId() {
                   setLoading(true);
 
-                  // Recupera i dettagli della piattaforma in base al platform_slug
                   const platformResponse = await fetch(`${import.meta.env.VITE_API_BASE_URL}platforms?key=${import.meta.env.VITE_API_KEY}&slug=${platform_slug}`);
                   const platformJson = await platformResponse.json();
 
                   if (platformJson.results && platformJson.results.length > 0) {
-                        const platform_id = platformJson.results[0].id; // Ottieni l'ID della piattaforma
-                        fetchPlatformsGames(platform_id); // Recupera i giochi usando l'ID della piattaforma
+                        const platform_id = platformJson.results[0].id;
+                        fetchPlatformsGames(platform_id);
                   } else {
                         console.error('Piattaforma non trovata');
                         setLoading(false);
@@ -34,9 +33,9 @@ export default function AppPlatform() {
                   setLoading(false);
             }
 
-            fetchPlatformId(); // Prima recupera l'ID della piattaforma
+            fetchPlatformId();
 
-      }, [platform_slug]); // Aggiungi platform_slug come dipendenza in modo che l'effetto si attivi quando cambia lo slug
+      }, [platform_slug]);
 
       console.log(platformsGames);
 

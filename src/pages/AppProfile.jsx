@@ -57,7 +57,7 @@ export default function AppProfile() {
             <div className=" flex justify-center mt-5">
                   <Card
                         isBlurred
-                        className="border-none mt-14 bg-background/60 dark:bg-default-100/50 h-[650px] w-[65%] "
+                        className=" mt-14 border border-default-200 bg-gradient-to-br from-white to-default-200 dark:from-default-50 dark:to-black  h-[650px] w-[65%]  "
                         shadow="sm"
 
                   >
@@ -88,8 +88,8 @@ export default function AppProfile() {
 
                                           <Accordion variant="splitted">
                                                 <AccordionItem startContent={<HeartIcon className=" text-red-800 " />} aria-label="Accordion 1" title="Favourite games">
-                                                      <div className="max-h-[20vh] overflow-y-auto p-5">
-                                                            {fav ? (
+                                                      <div className="max-h-[20vh] overflow-y-auto p-5 text-white">
+                                                            {fav.length ? (
                                                                   <ul>
                                                                         {fav.map(fav => (
                                                                               <>
@@ -99,7 +99,7 @@ export default function AppProfile() {
                                                                         ))}
                                                                   </ul>
                                                             ) : (
-                                                                  <p>No favourites found.</p>
+                                                                  <p>There are no favorites at the moment</p>
                                                             )}
 
                                                       </div>

@@ -10,9 +10,6 @@ export default function AppGenre() {
       const [genreGames, setGenreGames] = useState([]);
       const [loading, setLoading] = useState(false);
 
-      
-
-
       useEffect(()=>{
             async function fetchGenreGames() {
                   setLoading(true)
