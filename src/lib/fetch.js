@@ -24,7 +24,8 @@ export async function preLoadedFilters () {
 
   return {
     genres,
-    platforms
+    platforms,
+
   }
 }
 
@@ -37,3 +38,6 @@ export async function fetchGame ({ params }) {
   const json = await response.json()
   return json
 }
+
+
+

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Input } from "@nextui-org/react";
 import AutoCompleteCard from "../AutoCompleteCardUI";
 import ProgressBar from "../Progress/ProgressBar";
+import { Link } from "react-router";
 
 
 export const SearchIcon = ({ size = 24, strokeWidth = 1.5, width, height, ...props }) => {
@@ -38,6 +39,8 @@ export default function ModalNav() {
       const [games, setGames] = useState([]);
       const [loading, setLoading] = useState(false);
       const { isOpen, onOpen, onOpenChange } = useDisclosure();
+      
+
 
 
       useEffect(() => {
@@ -85,19 +88,20 @@ export default function ModalNav() {
 
                                                 />
                                                 <div className="max-h-[30vh] overflow-y-auto">
+
                                                       {loading && <ProgressBar />}
                                                       {games && games.map(game => (
-                                                            <AutoCompleteCard key={game.id} game={game} />
+                                                            <Link to={`/game/${game.id}`} onClick={() => {onClose()}}>
+                                                                  <AutoCompleteCard key={game.id} game={game} />
+                                                            </Link>
                                                       ))}
+
                                                 </div>
 
                                           </ModalBody>
                                           <ModalFooter>
-                                                <Button color="danger" variant="light" onPress={onClose}>
+                                                <Button color="danger" variant="ghost" onPress={onClose}>
                                                       Close
-                                                </Button>
-                                                <Button color="primary" onPress={onClose}>
-                                                      Action
                                                 </Button>
                                           </ModalFooter>
                                     </>

@@ -1,11 +1,15 @@
 import { useContext, useEffect, useState } from "react";
 import { useLoaderData } from "react-router"
-import { Image, Button, Form, Input } from "@nextui-org/react";
+import { Image, Button, Form, Input, CircularProgress, Card, CardBody, CardFooter, Chip } from "@nextui-org/react";
 import supabase from "../supabase/client";
 import SessionContext from "../context/SessionContext";
 import { Toaster, toast } from 'sonner';
 import ProgressBar from "../components/NavbarUI/Progress/ProgressBar";
 import RealtimeChat from "../components/NavbarUI/RealtimeChatUI";
+import CardRatings from "../components/NavbarUI/Ratings/CardRatings";
+
+
+
 
 
 export const HeartIcon = ({ fill = "currentColor", filled, size, height, width, ...props }) => {
@@ -61,11 +65,14 @@ export const DeleteDocumentIcon = (props) => {
 
 export default function AppGame() {
 
-
       const session = useContext(SessionContext);
       const game = useLoaderData()
       const [loading, setLoading] = useState();
-      const [fav, setFav] = useState([])
+      const [fav, setFav] = useState([]);
+      console.log(game);
+
+
+
 
       async function readFav() {
             const { user } = session
@@ -152,8 +159,24 @@ export default function AppGame() {
                               {loading && <ProgressBar />}
                         </div>
                         <div className=" grid grid-cols-2 ms-40">
-                              <div className=" flex">
+                              <div className=" ">
                                     <h3>{game.description_raw}</h3>
+                                    <div className="flex mt-3">
+                                          {game.ratings.map((rating) => (
+                                                <CardRatings key={rating.id} rating={rating} />
+                                          ))}
+                                    </div>
+                                    <div className=" mt-3">
+                                          <h3 className=" text-lg">Tags</h3>
+                                          <ul className="flex flex-wrap gap-2">
+                                                {game.tags.map((tag) => (
+                                                      <li key={tag.id} >
+                                                            <p className=" underline">{tag.name},</p>
+                                                      </li>
+                                                ))}
+                                          </ul>
+                                    </div>
+                                    <p>{game.youtube_count}</p>
                               </div>
                               <div className="  ">
                                     <div className=" flex justify-center">
@@ -177,7 +200,7 @@ export default function AppGame() {
                                                       }
                                                 </div>
                                                 <Toaster richColors />
-                                                <Button aria-label="Take a photo" color="warning" variant="faded">
+                                                <Button aria-label="Reviews" color="warning" variant="faded">
                                                       <p>
                                                             Your reviews
                                                       </p>
@@ -186,7 +209,7 @@ export default function AppGame() {
 
                                     {session &&
                                           <div className=" flex justify-center p-4">
-                                                <RealtimeChat game={game}  />
+                                                <RealtimeChat game={game} />
                                           </div>}
 
                                     {session &&

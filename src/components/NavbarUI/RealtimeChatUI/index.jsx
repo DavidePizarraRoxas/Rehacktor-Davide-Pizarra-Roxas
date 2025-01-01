@@ -80,11 +80,10 @@ export default function RealtimeChat({ game }) {
                         </CardHeader>
                         <Divider />
                         <CardBody ref={messageRef}>
-
                               {messages.map((message) => (
-                                    <div className=" p-2 " >
-                                          <Card key={message.id} isBlurred className="border border-default-200 bg-gradient-to-br from-white to-default-200 dark:from-default-50 dark:to-black ">
-                                                <CardBody className="  flex justify-center"  >
+                                    <div key={message.id} className=" p-2 " >
+                                          <Card  isBlurred className="border border-default-200 bg-gradient-to-br from-white to-default-200 dark:from-default-50 dark:to-black ">
+                                                <CardBody  className="  flex justify-center"  >
                                                       <p className=" text-lg font-bold">{message.profile_username}</p>
                                                       <span className="pt-2">
                                                             {message.content}
