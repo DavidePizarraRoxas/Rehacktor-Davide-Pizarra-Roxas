@@ -69,7 +69,7 @@ export default function Navabar() {
 
                                     </NavbarItem>
                                     <NavbarItem>
-                                          <Link to={`/singup`}>
+                                          <Link to={`/singup`} >
                                                 <Button color="primary" href="#" variant="flat">
                                                       Sign Up
                                                 </Button>

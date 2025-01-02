@@ -7,6 +7,7 @@ import { Toaster, toast } from 'sonner';
 import ProgressBar from "../components/NavbarUI/Progress/ProgressBar";
 import RealtimeChat from "../components/NavbarUI/RealtimeChatUI";
 import CardRatings from "../components/NavbarUI/Ratings/CardRatings";
+import { div } from "framer-motion/client";
 
 
 
@@ -154,7 +155,7 @@ export default function AppGame() {
       return (
             <>
                   <h1 className="text-5xl font-bold text-center mt-5 mb-10"> {game.name}</h1>
-                  <div className=" container mx-auto flex justify-center card">
+                  <div className=" mx-auto flex justify-center card">
                         <div className=" flex justify-evenly mt-5 mb-5">
                               {loading && <ProgressBar />}
                         </div>
@@ -178,7 +179,7 @@ export default function AppGame() {
                                     </div>
                                     <p>{game.youtube_count}</p>
                               </div>
-                              <div className="  ">
+                              <div className="">
                                     <div className=" flex justify-center">
                                           <Image
                                                 alt="NextUI hero Image"
@@ -208,12 +209,16 @@ export default function AppGame() {
                                           </div>}
 
                                     {session &&
-                                          <div className=" flex justify-center p-4">
-                                                <RealtimeChat game={game} />
-                                          </div>}
+                                          <div className=" flex justify-center">
+                                                <div className=" p-4 w-[675px] ">
+                                                      <RealtimeChat game={game} />
+                                                </div>
+                                          </div>
+                                    }
 
                                     {session &&
-                                          <div className="p-4">
+                                    <div className=" flex justify-center">
+                                          <div className="p-4 w-[675px]">
                                                 <Form className="" validationBehavior="native" onSubmit={handleMessageSubmit}>
                                                       <div className="flex w-full gap-2 ">
                                                             <Input
@@ -231,6 +236,7 @@ export default function AppGame() {
                                                       </div>
                                                 </Form>
                                           </div>
+                                    </div>
                                     }
 
 

@@ -5,10 +5,12 @@ import { Spinner } from "@nextui-org/react";
 import GameUI from "../components/NavbarUI/GameUI/GameUI";
 import ProgressBar from "../components/NavbarUI/Progress/ProgressBar";
 import DropdownMain from "../components/NavbarUI/DropDown/DropDownMain";
+import SessionContext from "../context/SessionContext";
 
 export default function AppHome() {
 
-      const [loading, setLoading] = useState(false)
+      const [loading, setLoading] = useState(false);
+      const session = useContext(SessionContext);
 
 
 
@@ -33,8 +35,6 @@ export default function AppHome() {
 
       useEffect(() => {
             if (games.items.length && inView && !games.isLoading) {
-                  console.log(games.items);
-
                   games.loadMore();
             }
       }, [games])
@@ -58,9 +58,11 @@ export default function AppHome() {
                                           <GameUI key={game.id} game={game} />
                                     ))}
                               </div>
-                              <div className=" flex justify-center pt-2  ">
-                                    <Spinner color="primary" ref={ref} />
-                              </div>
+                              {session &&
+                                    <div className=" flex justify-center pt-2  ">
+                                          <Spinner color="primary" ref={ref} />
+                                    </div>
+                              }
                         </div>
                   </div>
 

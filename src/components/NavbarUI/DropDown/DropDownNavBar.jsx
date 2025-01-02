@@ -39,7 +39,7 @@ export default function DropDownNavBar() {
                         </DropdownItem>
                         <DropdownItem className=" data-[hover=true]:bg-zinc-500" color="white" >
                               <Link to={`/account`} className="block w-full" >
-                                    Settings
+                                    Account
                               </Link>
                         </DropdownItem>
 

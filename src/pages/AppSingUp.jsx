@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Form, Input, Button } from "@nextui-org/react";
+import { Form, Input, Button, Image } from "@nextui-org/react";
 import supabase from "../supabase/client";
 import { Toaster, toast } from 'sonner';
 import { useNavigate } from "react-router";
@@ -125,17 +125,22 @@ export default function AppSingUp() {
       }
       return (
             <>
-                  <h1 className=" text-center text-6xl font-bold mt-6 mb-2">
-                        Register
-                  </h1>
-                  <div className=" flex justify-center p-5">
-                        <Form className="grid grid-cols-2 items-center w-[75%] mt-5 shadow-lg shadow-white rounded-md" validationBehavior="native" onSubmit={hundleSubmission} >
+                  <div className=" flex justify-center items-center mt-20 ">
+                        <Form className=" grid grid-cols-2 w-[75%] h-[700px] p-10 mt-5 border border-default-200 bg-gradient-to-br from-white to-default-200 dark:from-default-50 dark:to-black rounded-md " validationBehavior="native" onSubmit={hundleSubmission} >
                               {/* Immagine */}
-                              <div className="  ">
-                                    <img src="/SingUp.jpeg" alt="" className="object-cover rounded-s-md" />
+                              <div className=" flex justify-center items-center mt-10  ">
+                                    <Image
+                                          isBlurred
+                                          alt="NextUI Album Cover"
+                                          className="m-5"
+                                          src="/AdobeStock_555825144_Preview_resized.jpeg"
+                                          width={1000}
+                                          height={500}
+                                    />
                               </div>
                               {/* Input */}
-                              <div className="ps-24 pe-24  ">
+                              <div className="ps-24 pe-24 mt-28  ">
+                                    <h2 className=" text-5xl mb-[60px] text-center font-bold ">Create Account</h2>
                                     <Input
                                           className="mb-5 "
                                           isRequired
@@ -148,30 +153,32 @@ export default function AppSingUp() {
                                                 <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
                                           }
                                     />
-                                    <Input
-                                          className="mb-5 "
-                                          isRequired
-                                          errorMessage="Please enter a valid first name"
-                                          labelPlacement="outside"
-                                          name="first_name"
-                                          placeholder="Enter your first name"
-                                          type="text"
-                                          startContent={
-                                                <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
-                                          }
-                                    />
-                                    <Input
-                                          className="mb-5 "
-                                          isRequired
-                                          errorMessage="Please enter a valid last name"
-                                          labelPlacement="outside"
-                                          name="last_name"
-                                          placeholder="Enter your last name"
-                                          type="text"
-                                          startContent={
-                                                <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
-                                          }
-                                    />
+                                    <div className=" grid grid-cols-2 gap-2">
+                                          <Input
+                                                className="mb-5 "
+                                                isRequired
+                                                errorMessage="Please enter a valid first name"
+                                                labelPlacement="outside"
+                                                name="first_name"
+                                                placeholder="Enter your first name"
+                                                type="text"
+                                                startContent={
+                                                      <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+                                                }
+                                          />
+                                          <Input
+                                                className="mb-5 "
+                                                isRequired
+                                                errorMessage="Please enter a valid last name"
+                                                labelPlacement="outside"
+                                                name="last_name"
+                                                placeholder="Enter your last name"
+                                                type="text"
+                                                startContent={
+                                                      <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+                                                }
+                                          />
+                                    </div>
                                     <Input
                                           className="mb-5 "
                                           isRequired
@@ -208,7 +215,7 @@ export default function AppSingUp() {
                                     />
                                     <div className="mt-10 flex justify-center">
                                           <Button type="submit" variant="bordered" color="primary">
-                                                Register
+                                                Create Accont
                                           </Button>
                                           <Toaster richColors />
                                     </div>

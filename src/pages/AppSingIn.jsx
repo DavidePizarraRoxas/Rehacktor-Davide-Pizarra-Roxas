@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { Form, Input, Button } from "@nextui-org/react";
+import { Form, Input, Button,Image } from "@nextui-org/react";
 import supabase from "../supabase/client";
 import { Toaster, toast } from 'sonner';
 
@@ -118,14 +118,12 @@ export default function AppSingIn() {
       return (
 
             <>
-                  <h1 className=" text-center text-6xl font-bold mt-6 mb-2">
-                        Login
-                  </h1>
-                  <div className=" flex justify-center p-5 ">
 
-                        <Form className="grid grid-cols-2 items-center w-[75%] mt-5  shadow-lg shadow-white rounded-md" validationBehavior="native" onSubmit={hundleSignIn}  >
-                              <div className="ps-24 pe-24  ">
+                  <div className=" flex justify-center items-center  mt-20">
 
+                        <Form className="grid grid-cols-2 w-[75%] h-[700px] p-10 mt-5 border border-default-200 bg-gradient-to-br from-white to-default-200 dark:from-default-50 dark:to-black rounded-md" validationBehavior="native" onSubmit={hundleSignIn}  >
+                              <div className="ps-20 pe-20 mt-36  ">
+                              <h2 className=" text-5xl mb-[60px] text-center  font-bold">Welcome back</h2>
                                     <Input
                                           className="mb-5 "
                                           isRequired
@@ -161,15 +159,23 @@ export default function AppSingIn() {
 
                                     />
                                     <div className="mt-10 flex justify-center">
-                                          <Button type="submit" variant="bordered" color="primary">
+                                          <Button type="submit" variant="bordered" color="primary" className=" w-full">
                                                 Log-In
                                           </Button>
                                           <Toaster richColors />
 
                                     </div>
                               </div>
-                              <div>
-                                    <img src="/SingInPic.png" alt="" className=" object-cover rounded-e-md " />
+                              <div className="flex justify-center items-center mt-10">
+
+                                    <Image
+                                          isBlurred
+                                          alt="image singIn"
+                                          className="m-5"
+                                          src="/AdobeStock_935119027_Preview.jpeg"
+                                          width={1000}
+                                          height={500}
+                                    />
                               </div>
                         </Form>
                   </div>
