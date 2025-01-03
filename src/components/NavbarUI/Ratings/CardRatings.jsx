@@ -19,7 +19,7 @@ export default function CardRatings({ rating }) {
       const progressColor = progressColors[rating.title] || "primary";
       const chipColor = chipColors[rating.title] || "text-blue-500";
       return (
-            <div className=" w-full">
+            <div className=" w-full mb-14">
                   <div className="flex justify-evenly mb-2 ">
                         <CircularProgress
                               classNames={{

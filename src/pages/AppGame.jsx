@@ -1,13 +1,15 @@
 import { useContext, useEffect, useState } from "react";
 import { useLoaderData } from "react-router"
-import { Image, Button, Form, Input, CircularProgress, Card, CardBody, CardFooter, Chip } from "@nextui-org/react";
+import { Image, Button, Form, Input, Card, CardHeader, CardBody, Divider } from "@nextui-org/react";
 import supabase from "../supabase/client";
 import SessionContext from "../context/SessionContext";
 import { Toaster, toast } from 'sonner';
 import ProgressBar from "../components/NavbarUI/Progress/ProgressBar";
 import RealtimeChat from "../components/NavbarUI/RealtimeChatUI";
 import CardRatings from "../components/NavbarUI/Ratings/CardRatings";
-import { div } from "framer-motion/client";
+import ScreenShoot from "../components/NavbarUI/ScreenShoot";
+
+
 
 
 
@@ -71,6 +73,8 @@ export default function AppGame() {
       const [loading, setLoading] = useState();
       const [fav, setFav] = useState([]);
       console.log(game);
+
+
 
 
 
@@ -154,94 +158,145 @@ export default function AppGame() {
 
       return (
             <>
-                  <h1 className="text-5xl font-bold text-center mt-5 mb-10"> {game.name}</h1>
+                  <header className="card flex justify-center p-6">
+
+                        <Image
+                              isBlurred
+                              alt="background_image"
+                              src={game.background_image}
+                              width={1000}
+                              height={550}
+                        />
+                  </header>
+                  <div className=" flex  justify-center items-center">
+                        <h1 className="text-5xl font-bold text-center mt-5 mb-10"> {game.name} </h1>
+                        {session &&
+                              <div className=" ps-11 flex justify-center items-center pb-3">
+                                    {fav.length == 0 ?
+                                          <Button isIconOnly aria-label="Like" color="danger" startContent={<HeartIcon />} onPress={() => insertIntoFav(game)}>
+                                          </Button> :
+                                          <Button aria-label="Like" variant="bordered" startContent={<DeleteDocumentIcon />} onPress={() => removeFromFav(game)}>
+
+                                          </Button>
+                                    }
+                              </div>
+                        }
+                        <Toaster richColors />
+
+                  </div>
                   <div className=" mx-auto flex justify-center card">
                         <div className=" flex justify-evenly mt-5 mb-5">
                               {loading && <ProgressBar />}
                         </div>
-                        <div className=" grid grid-cols-2 ms-40">
-                              <div className=" ">
-                                    <h3>{game.description_raw}</h3>
-                                    <div className="flex mt-3">
-                                          {game.ratings.map((rating) => (
-                                                <CardRatings key={rating.id} rating={rating} />
-                                          ))}
-                                    </div>
-                                    <div className=" mt-3">
-                                          <h3 className=" text-lg">Tags</h3>
-                                          <ul className="flex flex-wrap gap-2">
-                                                {game.tags.map((tag) => (
-                                                      <li key={tag.id} >
-                                                            <p className=" underline">{tag.name},</p>
-                                                      </li>
+                        <div className="">
+                              <div className=" grid grid-cols-2 ms-40 me-40 ">
+                                    <div className="">
+                                          <div className="flex mt-3">
+                                                {game.ratings.map((rating) => (
+                                                      <CardRatings key={rating.id} rating={rating} />
                                                 ))}
-                                          </ul>
+                                          </div>
+                                          <div className="p-5">
+                                                <h2 className=" ms-10 text-xl">About</h2>
+                                                <h3 className=" p-7">{game.description_raw} </h3>
+                                          </div>
+
+
                                     </div>
-                                    <p>{game.youtube_count}</p>
-                              </div>
-                              <div className="">
-                                    <div className=" flex justify-center">
-                                          <Image
-                                                alt="NextUI hero Image"
-                                                src={game.background_image}
-                                                width={600}
-                                                height={330}
-                                          />
-                                    </div>
-                                    {session &&
-                                          <div className="flex gap-4 items-center justify-center mt-7 ">
-                                                <div>
-                                                      {fav.length == 0 ?
-                                                            <Button aria-label="Like" color="danger" variant="bordered" startContent={<HeartIcon className=" text-danger-500" />} onPress={() => insertIntoFav(game)}>
-                                                                  Add favourite
-                                                            </Button> :
-                                                            <Button aria-label="Like" variant="bordered" startContent={<DeleteDocumentIcon />} onPress={() => removeFromFav(game)}>
-                                                                  Remove from favorites
-                                                            </Button>
-                                                      }
+                                    <div className="p-10">
+                                          <div>
+                                                <h3 className=" text-2xl text-center p-5 font-bold">Screenshoot</h3>
+                                                <ScreenShoot game={game} />
+                                          </div>
+
+                                          {/* General Information */}
+                                          <div className=" container mt-6" >
+                                                <div className=" flex justify-center" >
+                                                      <Card className="w-[95%]  border border-default-200 bg-gradient-to-br from-white to-default-200 dark:from-default-50 dark:to-black ">
+                                                            <CardHeader className=" flex justify-center">
+                                                                  <h3 className=" text-xl text-center p-3 font-bold">Genreal Information </h3>
+                                                            </CardHeader>
+                                                            <Divider />
+                                                            <CardBody className=" grid grid-cols-2 gap-3">
+                                                                  <Card className="">
+                                                                        <CardBody>
+                                                                              <div className=" text-center">
+                                                                                    <h4 className=" font-bold">Genre:</h4>
+                                                                                    <div className="flex gap-1 justify-center">
+                                                                                          {game.genres.map((genre) => (
+                                                                                                <ul key={genre.id} className="">
+                                                                                                      <li className="">
+                                                                                                            <p className="">{genre.name}, </p>
+                                                                                                      </li>
+                                                                                                </ul>
+                                                                                          ))}
+                                                                                    </div>
+
+                                                                              </div>
+                                                                        </CardBody>
+                                                                  </Card>
+                                                                  <Card className="">
+                                                                        <CardBody>
+                                                                              <div className=" text-center">
+                                                                                    <h4 className="font-bold">Publishers</h4>
+                                                                                    {game.publishers.map((publisher) => (
+                                                                                          <ul key={publisher.id}>
+                                                                                                <li>
+                                                                                                      <p>{publisher.name}</p>
+                                                                                                </li>
+                                                                                          </ul>
+                                                                                    ))}
+                                                                              </div>
+                                                                        </CardBody>
+                                                                  </Card>
+                                                                  <Card className="">
+                                                                        <CardBody>
+                                                                              <div className="text-center">
+                                                                                    <h4 className=" font-bold">Release date</h4>
+                                                                                    <p>{game.released}</p>
+                                                                              </div>
+                                                                        </CardBody>
+                                                                  </Card>
+                                                            </CardBody>
+                                                      </Card>
                                                 </div>
-                                                <Toaster richColors />
-                                                <Button aria-label="Reviews" color="warning" variant="faded">
-                                                      <p>
-                                                            Your reviews
-                                                      </p>
-                                                </Button>
-                                          </div>}
+                                          </div>
+
+                                    </div>
+                              </div>
+                              <div>
 
                                     {session &&
                                           <div className=" flex justify-center">
-                                                <div className=" p-4 w-[675px] ">
+                                                <div className="  w-[775px] h-[300px] ">
                                                       <RealtimeChat game={game} />
                                                 </div>
                                           </div>
                                     }
 
                                     {session &&
-                                    <div className=" flex justify-center">
-                                          <div className="p-4 w-[675px]">
-                                                <Form className="" validationBehavior="native" onSubmit={handleMessageSubmit}>
-                                                      <div className="flex w-full gap-2 ">
-                                                            <Input
-                                                                  label="Live chat with other gamers"
-                                                                  labelPlacement="outside"
-                                                                  name="message"
-                                                                  placeholder="Chat..."
-                                                                  type="text"
-                                                                  aria-label="message"
-                                                            />
-                                                            <Button color="primary" type="submit" aria-label="Submit" className=" mt-6" >
-                                                                  Send
-                                                            </Button>
-                                                            <Toaster richColors />
-                                                      </div>
-                                                </Form>
+                                          <div className=" flex justify-center">
+                                                <div className="p-4 w-[675px]">
+                                                      <Form className="" validationBehavior="native" onSubmit={handleMessageSubmit}>
+                                                            <div className="flex w-full gap-2 ">
+                                                                  <Input
+                                                                        label="Live chat with other gamers"
+                                                                        labelPlacement="outside"
+                                                                        name="message"
+                                                                        placeholder="Chat..."
+                                                                        type="text"
+                                                                        aria-label="message"
+                                                                  />
+                                                                  <Button color="primary" type="submit" aria-label="Submit" className=" mt-6" >
+                                                                        Send
+                                                                  </Button>
+                                                                  <Toaster richColors />
+                                                            </div>
+                                                      </Form>
+                                                </div>
                                           </div>
-                                    </div>
                                     }
-
-
                               </div>
-
                         </div>
                   </div>
 
