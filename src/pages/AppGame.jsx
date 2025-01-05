@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useLoaderData } from "react-router"
-import { Image, Button, Form, Input, Card, CardHeader, CardBody, Divider } from "@nextui-org/react";
+import { Image, Button, Form, Input, Card, CardHeader, CardBody, Divider, ScrollShadow } from "@nextui-org/react";
 import supabase from "../supabase/client";
 import SessionContext from "../context/SessionContext";
 import { Toaster, toast } from 'sonner';
@@ -8,6 +8,7 @@ import ProgressBar from "../components/NavbarUI/Progress/ProgressBar";
 import RealtimeChat from "../components/NavbarUI/RealtimeChatUI";
 import CardRatings from "../components/NavbarUI/Ratings/CardRatings";
 import ScreenShoot from "../components/NavbarUI/ScreenShoot";
+import Achievements from "../components/Achievement";
 
 
 
@@ -72,12 +73,6 @@ export default function AppGame() {
       const game = useLoaderData()
       const [loading, setLoading] = useState();
       const [fav, setFav] = useState([]);
-      console.log(game);
-
-
-
-
-
 
       async function readFav() {
             const { user } = session
@@ -168,7 +163,7 @@ export default function AppGame() {
                               height={550}
                         />
                   </header>
-                  <div className=" flex  justify-center items-center">
+                  <div className=" flex justify-center items-center">
                         <h1 className="text-5xl font-bold text-center mt-5 mb-10"> {game.name} </h1>
                         {session &&
                               <div className=" ps-11 flex justify-center items-center pb-3">
@@ -184,35 +179,52 @@ export default function AppGame() {
                         <Toaster richColors />
 
                   </div>
-                  <div className=" mx-auto flex justify-center card">
+                  <div className="  flex justify-center card">
                         <div className=" flex justify-evenly mt-5 mb-5">
                               {loading && <ProgressBar />}
                         </div>
                         <div className="">
                               <div className=" grid grid-cols-2 ms-40 me-40 ">
-                                    <div className="">
-                                          <div className="flex mt-3">
-                                                {game.ratings.map((rating) => (
-                                                      <CardRatings key={rating.id} rating={rating} />
-                                                ))}
-                                          </div>
+                                    <div className=" grind grid-cols-1 mt-14">
                                           <div className="p-5">
-                                                <h2 className=" ms-10 text-xl">About</h2>
-                                                <h3 className=" p-7">{game.description_raw} </h3>
+                                                <Card className="  border border-default-200 bg-gradient-to-br from-white to-default-200 dark:from-default-50 dark:to-black h-[54vh]  "
+                                                >
+                                                      <CardHeader className=" flex justify-center">
+                                                            <h3 className=" text-xl text-center p-3 font-bold">About </h3>
+                                                      </CardHeader>
+                                                      <Divider />
+                                                      <CardBody className="max-h-[50vh] overflow-y-auto flex ">
+                                                            <ScrollShadow hideScrollBar>
+                                                                  <h3 className="p-5">{game.description_raw} </h3>
+                                                            </ScrollShadow>
+                                                      </CardBody>
+                                                </Card>
                                           </div>
-
-
+                                          {/* Reating section */}
+                                          <div className="p-5">
+                                                <Card className="">
+                                                      <CardHeader className="flex justify-center">
+                                                            <h3 className="  text-xl text-center p-3 font-bold">Reatings</h3>
+                                                      </CardHeader>
+                                                      <Divider />
+                                                      <CardBody className=" grid grid-cols-4 ">
+                                                            {game.ratings.map((rating) => (
+                                                                  <CardRatings key={rating.id} rating={rating} />
+                                                            ))}
+                                                      </CardBody>
+                                                </Card>
+                                          </div>
                                     </div>
-                                    <div className="p-10">
-                                          <div>
+                                    <div className="ps-10 pt-10 pe-10">
+                                          <div className="">
                                                 <h3 className=" text-2xl text-center p-5 font-bold">Screenshoot</h3>
                                                 <ScreenShoot game={game} />
                                           </div>
 
                                           {/* General Information */}
-                                          <div className=" container mt-6" >
+                                          <div className=" container mt-10" >
                                                 <div className=" flex justify-center" >
-                                                      <Card className="w-[95%]  border border-default-200 bg-gradient-to-br from-white to-default-200 dark:from-default-50 dark:to-black ">
+                                                      <Card className="w-full  border border-default-200 bg-gradient-to-br from-white to-default-200 dark:from-default-50 dark:to-black  ">
                                                             <CardHeader className=" flex justify-center">
                                                                   <h3 className=" text-xl text-center p-3 font-bold">Genreal Information </h3>
                                                             </CardHeader>
@@ -239,13 +251,15 @@ export default function AppGame() {
                                                                         <CardBody>
                                                                               <div className=" text-center">
                                                                                     <h4 className="font-bold">Publishers</h4>
-                                                                                    {game.publishers.map((publisher) => (
-                                                                                          <ul key={publisher.id}>
-                                                                                                <li>
-                                                                                                      <p>{publisher.name}</p>
-                                                                                                </li>
-                                                                                          </ul>
-                                                                                    ))}
+                                                                                    <div className="flex gap-1 justify-center">
+                                                                                          {game.publishers.map((publisher) => (
+                                                                                                <ul key={publisher.id}>
+                                                                                                      <li className="">
+                                                                                                            <p>{publisher.name},</p>
+                                                                                                      </li>
+                                                                                                </ul>
+                                                                                          ))}
+                                                                                    </div>
                                                                               </div>
                                                                         </CardBody>
                                                                   </Card>
@@ -261,41 +275,42 @@ export default function AppGame() {
                                                       </Card>
                                                 </div>
                                           </div>
-
                                     </div>
-                              </div>
-                              <div>
 
-                                    {session &&
-                                          <div className=" flex justify-center">
-                                                <div className="  w-[775px] h-[300px] ">
-                                                      <RealtimeChat game={game} />
+                                    <div className="p-5">
+                                          <Achievements game={game} />
+                                    </div>
+                                    <div className="ps-10  pe-10">
+                                          {session &&
+                                                <div className=" flex justify-center mt-5 ">
+                                                      <div className="  w-[775px] h-[350px] ">
+                                                            <RealtimeChat game={game} />
+                                                      </div>
                                                 </div>
-                                          </div>
-                                    }
-
-                                    {session &&
-                                          <div className=" flex justify-center">
-                                                <div className="p-4 w-[675px]">
-                                                      <Form className="" validationBehavior="native" onSubmit={handleMessageSubmit}>
-                                                            <div className="flex w-full gap-2 ">
-                                                                  <Input
-                                                                        label="Live chat with other gamers"
-                                                                        labelPlacement="outside"
-                                                                        name="message"
-                                                                        placeholder="Chat..."
-                                                                        type="text"
-                                                                        aria-label="message"
-                                                                  />
-                                                                  <Button color="primary" type="submit" aria-label="Submit" className=" mt-6" >
-                                                                        Send
-                                                                  </Button>
-                                                                  <Toaster richColors />
-                                                            </div>
-                                                      </Form>
+                                          }
+                                          {session &&
+                                                <div className=" flex justify-center mt-7">
+                                                      <div className="p-4 w-[675px]">
+                                                            <Form className="" validationBehavior="native" onSubmit={handleMessageSubmit}>
+                                                                  <div className="flex w-full gap-2 ">
+                                                                        <Input
+                                                                              label="Live chat with other gamers"
+                                                                              labelPlacement="outside"
+                                                                              name="message"
+                                                                              placeholder="Chat..."
+                                                                              type="text"
+                                                                              aria-label="message"
+                                                                        />
+                                                                        <Button color="primary" type="submit" aria-label="Submit" className=" mt-6" >
+                                                                              Send
+                                                                        </Button>
+                                                                        <Toaster richColors />
+                                                                  </div>
+                                                            </Form>
+                                                      </div>
                                                 </div>
-                                          </div>
-                                    }
+                                          }
+                                    </div>
                               </div>
                         </div>
                   </div>

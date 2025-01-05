@@ -11,18 +11,20 @@ export default function DropDownsGenres() {
                   <DropdownMenu aria-label="Static Actions" variant="faded" className="max-h-[50vh] overflow-y-auto border-none">
                         {genres.map((genre) => (
                               <DropdownItem key={genre.id} className=" data-[hover=true]:bg-zinc-500 ">
-                                    <Link to={`/genre/${genre.slug}`}>
-                                          <div className="flex gap-4">
-                                                <Avatar
-                                                      isBordered
-                                                      color="primary"
-                                                      src={genre.image_background}
 
-                                                />
-                                                <span className="text-white mt-2">{genre.name}</span>
-                                          </div>
+                                          <Link to={`/genre/${genre.slug}`}>
+                                                <div className="flex gap-4">
+                                                      <Avatar
+                                                            isBordered
+                                                            color="primary"
+                                                            src={genre.image_background}
+                                                      />
+                                                      <span className="text-white mt-2">{genre.name}</span>
+                                                </div>
 
-                                    </Link>
+                                          </Link>
+
+
                               </DropdownItem>
                         ))}
                   </DropdownMenu>

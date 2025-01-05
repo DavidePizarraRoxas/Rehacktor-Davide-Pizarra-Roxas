@@ -13,7 +13,6 @@ export default function DropDownsPlatforms() {
                   </DropdownTrigger>
                   <DropdownMenu aria-label="Static Actions" variant="faded" className="max-h-[50vh] overflow-y-auto">
                         {platforms.map((platform) => (
-
                               <DropdownItem key={platform.id} className=" data-[hover=true]:bg-zinc-500">
                                     <Link to={`/platform/${platform.slug}`}>
                                           <div className="flex gap-4">
@@ -21,15 +20,11 @@ export default function DropDownsPlatforms() {
                                                       color="primary"
                                                       src={platform.image_background}
                                                 />
-
                                                 <span className="text-white mt-2">{platform.name}</span>
                                           </div>
                                     </Link>
 
                               </DropdownItem>
-
-
-
                         ))}
 
                   </DropdownMenu>

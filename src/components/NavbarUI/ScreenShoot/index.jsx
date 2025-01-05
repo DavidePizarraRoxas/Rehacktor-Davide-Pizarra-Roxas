@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-import { Image } from "@nextui-org/react";
-
-
+import { Image, Button, Form, Input, Card, CardHeader, CardBody, Divider,  } from "@nextui-org/react";
 
 export default function ScreenShoot({ game }) {
       const [screenshoot, setScreenshoot] = useState([]);
@@ -15,14 +13,14 @@ export default function ScreenShoot({ game }) {
                   const json = await response.json();
                   setScreenshoot(json.results)
                   setLoading(false)
-
-
             }
             fetchScreenshoot();
       }, [game.id])
+
+
       return (
-            <div className=" container rounded-lg ">
-                  <div className=" grid grid-cols-3 gap-3 card">
+            <div className=" flex justify-evenly rounded-lg  ">
+                  <div className=" grid grid-cols-2 gap-3 card">
                         {screenshoot.map((screenshot) => (
                                     <Image
                                           key={screenshot.id}
