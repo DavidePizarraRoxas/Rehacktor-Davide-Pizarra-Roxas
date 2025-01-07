@@ -3,8 +3,7 @@ import { Link, useLoaderData } from "react-router";
 
 export default function DropDownsPlatforms() {
       const { platforms } = useLoaderData();
-
-
+      console.log(platforms);
 
       return (
             <Dropdown backdrop="blur" className=" bg-zinc-800 dropdown">
@@ -14,7 +13,7 @@ export default function DropDownsPlatforms() {
                   <DropdownMenu aria-label="Static Actions" variant="faded" className="max-h-[50vh] overflow-y-auto">
                         {platforms.map((platform) => (
                               <DropdownItem key={platform.id} className=" data-[hover=true]:bg-zinc-500">
-                                    <Link to={`/platform/${platform.slug}`}>
+                                    <Link to={`/platform/${platform.id}`}>
                                           <div className="flex gap-4">
                                                 <Avatar isBordered
                                                       color="primary"

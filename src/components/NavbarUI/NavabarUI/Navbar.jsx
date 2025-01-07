@@ -46,7 +46,7 @@ export default function Navabar() {
             <Navbar shouldHideOnScroll isBordered className="navbar p-2">
                   <NavbarBrand>
                         <Link to={`/`}>
-                              <h1 className=" text-4xl font-bold text-inherit">Reahacktor</h1>
+                              <h1 className=" text-4xl font-bold text-inherit">Rehacktor</h1>
                         </Link>
                   </NavbarBrand>
                   <NavbarContent className="hidden lg:flex gap-4 w-[50%]" justify="center">

@@ -28,7 +28,7 @@ const router = createBrowserRouter(
             <Route path="/" element={<AppLayout />}>
                   <Route path="/" element={<AppHome />} loader={preLoadedFilters}  />
                   <Route path="/genre/:genre_slug" element={<AppGenre />} />
-                  <Route path="/platform/:platform_slug" element={<AppPlatform />} />
+                  <Route path="/platform/:platform_id" element={<AppPlatform />} />
                   <Route path="/game/:id" element={<AppGame />} loader={fetchGame} />
                   <Route path="/singin" element={<AppSingIn />} />
                   <Route path="/singup" element={<AppSingUp />} />

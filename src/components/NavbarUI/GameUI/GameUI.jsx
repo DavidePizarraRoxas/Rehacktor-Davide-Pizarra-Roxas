@@ -3,10 +3,11 @@ import GameImage from "./components/GameImage"
 import { Link } from "react-router"
 export default function GameUI({ game }) {
 
-      const { background_image: image } = game
+      const { background_image: image } = game;
+      const fallbackImage = "path/to/fallback-image.jpg";
       return (
             <Card isFooterBlurred className=" h-[300px] card ">
-                  <GameImage image={image} />
+                  <GameImage image={image|| fallbackImage} />
                   <CardFooter className="absolute bg-black/40 bottom-0 z-10 border-t-1 border-default-600 dark:border-default-100">
                         <div className="flex flex-grow gap-2 items-center">
 

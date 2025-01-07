@@ -54,7 +54,7 @@ export default function AppProfile() {
 
       return (
 
-            <div className=" flex justify-center mt-5">
+            <div className=" flex justify-center mt-5 card">
                   <Card
                         isBlurred
                         className=" mt-14 border border-default-200 bg-gradient-to-br from-white to-default-200 dark:from-default-50 dark:to-black  h-[650px] w-[65%]  "
@@ -105,14 +105,7 @@ export default function AppProfile() {
                                                       </div>
 
                                                 </AccordionItem>
-                                                <AccordionItem key="2" aria-label="Accordion 2" title="Your review">
-
-                                                </AccordionItem>
-
                                           </Accordion>
-
-
-
                                     </div>
                               </div>
                         </CardBody>

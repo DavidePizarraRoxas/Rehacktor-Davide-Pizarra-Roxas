@@ -5,9 +5,6 @@
 .navbar > header {
   max-width: 100%;
 }
-.card {
-  animation: fadeIn 2s;
-}
 
 @keyframes fadeIn {
   from {
@@ -17,18 +14,21 @@
     opacity: 1;
   }
 }
-
-/* Transizione di opacità per il fade */
-.transition-opacity {
-  transition: opacity 0.5s ease-in-out; /* Tempo di transizione */
+.card {
+  animation: fadeIn 2s;
 }
 
-/* Opacità 0 per il fade-out */
-.opacity-0 {
-  opacity: 0;
+@keyframes fadeInHeader {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* Opacità 1 per il fade-in */
-.opacity-100 {
-  opacity: 1;
+.animate-fadeIn {
+  animation: fadeInHeader 1s ease-out forwards;
 }

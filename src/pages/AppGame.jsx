@@ -11,11 +11,6 @@ import ScreenShoot from "../components/NavbarUI/ScreenShoot";
 import Achievements from "../components/Achievement";
 
 
-
-
-
-
-
 export const HeartIcon = ({ fill = "currentColor", filled, size, height, width, ...props }) => {
       return (
             <svg
