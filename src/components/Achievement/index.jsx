@@ -44,13 +44,11 @@ export default function Achievements({ game }) {
                                           </CardBody>
                                     </Card>
                               </div>
-
                         ))}
                         </ScrollShadow>
 
                   </CardBody>
                   <Divider />
-
             </Card>
       );
 }

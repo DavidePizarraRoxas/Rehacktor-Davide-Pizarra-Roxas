@@ -10,15 +10,13 @@ export default function GameUI({ game }) {
                   <GameImage image={image|| fallbackImage} />
                   <CardFooter className="absolute bg-black/40 bottom-0 z-10 border-t-1 border-default-600 dark:border-default-100">
                         <div className="flex flex-grow gap-2 items-center">
-
                               <div className="flex flex-col">
-
                                     <p className="text-medium ">{game.name}</p>
                               </div>
                         </div>
 
                         <Link to={`/game/${game.id}`}>
-                              <Button radius="full" size="sm" color="primary">
+                              <Button radius="full" size="sm" color="primary" variant="shadow">
                                     Details
                               </Button>
                         </Link>

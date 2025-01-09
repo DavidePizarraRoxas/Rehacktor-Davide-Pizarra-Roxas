@@ -82,6 +82,33 @@ export const EyeFilledIcon = (props) => {
             </svg>
       );
 };
+export const UserIcon = ({ fill = "currentColor", size, height, width, ...props }) => {
+      return (
+            <svg
+                  data-name="Iconly/Curved/Profile"
+                  height={size || height || 24}
+                  viewBox="0 0 24 24"
+                  width={size || width || 24}
+                  xmlns="http://www.w3.org/2000/svg"
+                  {...props}
+            >
+                  <g
+                        fill="none"
+                        stroke={fill}
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeMiterlimit={10}
+                        strokeWidth={1.5}
+                  >
+                        <path
+                              d="M11.845 21.662C8.153 21.662 5 21.088 5 18.787s3.133-4.425 6.845-4.425c3.692 0 6.845 2.1 6.845 4.4s-3.134 2.9-6.845 2.9z"
+                              data-name="Stroke 1"
+                        />
+                        <path d="M11.837 11.174a4.372 4.372 0 10-.031 0z" data-name="Stroke 3" />
+                  </g>
+            </svg>
+      );
+};
 
 
 export default function AppSingUp() {
@@ -150,7 +177,7 @@ export default function AppSingUp() {
                                           placeholder="Enter your username"
                                           type="text"
                                           startContent={
-                                                <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+                                                <UserIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
                                           }
                                     />
                                     <div className=" grid grid-cols-2 gap-2">
@@ -162,9 +189,6 @@ export default function AppSingUp() {
                                                 name="first_name"
                                                 placeholder="Enter your first name"
                                                 type="text"
-                                                startContent={
-                                                      <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
-                                                }
                                           />
                                           <Input
                                                 className="mb-5 "
@@ -174,9 +198,6 @@ export default function AppSingUp() {
                                                 name="last_name"
                                                 placeholder="Enter your last name"
                                                 type="text"
-                                                startContent={
-                                                      <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
-                                                }
                                           />
                                     </div>
                                     <Input

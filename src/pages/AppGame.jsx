@@ -68,6 +68,8 @@ export default function AppGame() {
       const game = useLoaderData()
       const [loading, setLoading] = useState();
       const [fav, setFav] = useState([]);
+      console.log(game);
+
 
       async function readFav() {
             const { user } = session
@@ -202,7 +204,7 @@ export default function AppGame() {
                                                             <h3 className="  text-xl text-center p-3 font-bold">Reatings</h3>
                                                       </CardHeader>
                                                       <Divider />
-                                                      <CardBody className=" grid grid-cols-4 ">
+                                                      <CardBody className=" grid grid-cols-4  p-4">
                                                             {game.ratings.map((rating) => (
                                                                   <CardRatings key={rating.id} rating={rating} />
                                                             ))}
@@ -225,6 +227,7 @@ export default function AppGame() {
                                                             </CardHeader>
                                                             <Divider />
                                                             <CardBody className=" grid grid-cols-2 gap-3">
+                                                                  {/* genre */}
                                                                   <Card className="">
                                                                         <CardBody>
                                                                               <div className=" text-center">
@@ -242,10 +245,28 @@ export default function AppGame() {
                                                                               </div>
                                                                         </CardBody>
                                                                   </Card>
+                                                                  {/* Developers */}
                                                                   <Card className="">
                                                                         <CardBody>
                                                                               <div className=" text-center">
-                                                                                    <h4 className="font-bold">Publishers</h4>
+                                                                                    <h4 className="font-bold">Developers:</h4>
+                                                                                    <div className="flex gap-1 justify-center">
+                                                                                          {game.developers.map((developer) => (
+                                                                                                <ul key={developer.id}>
+                                                                                                      <li className="">
+                                                                                                            <p>{developer.name},</p>
+                                                                                                      </li>
+                                                                                                </ul>
+                                                                                          ))}
+                                                                                    </div>
+                                                                              </div>
+                                                                        </CardBody>
+                                                                  </Card>
+                                                                  {/* Publischer */}
+                                                                  <Card className="">
+                                                                        <CardBody>
+                                                                              <div className=" text-center">
+                                                                                    <h4 className="font-bold">Publishers:</h4>
                                                                                     <div className="flex gap-1 justify-center">
                                                                                           {game.publishers.map((publisher) => (
                                                                                                 <ul key={publisher.id}>
@@ -258,10 +279,11 @@ export default function AppGame() {
                                                                               </div>
                                                                         </CardBody>
                                                                   </Card>
+                                                                  {/* date relase */}
                                                                   <Card className="">
                                                                         <CardBody>
                                                                               <div className="text-center">
-                                                                                    <h4 className=" font-bold">Release date</h4>
+                                                                                    <h4 className=" font-bold">Release date:</h4>
                                                                                     <p>{game.released}</p>
                                                                               </div>
                                                                         </CardBody>

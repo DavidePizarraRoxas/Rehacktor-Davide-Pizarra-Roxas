@@ -10,8 +10,7 @@ export default function DropDownsGenres() {
                   </DropdownTrigger>
                   <DropdownMenu aria-label="Static Actions" variant="faded" className="max-h-[50vh] overflow-y-auto border-none">
                         {genres.map((genre) => (
-                              <DropdownItem key={genre.id} className=" data-[hover=true]:bg-zinc-500 ">
-
+                              <DropdownItem key={genre.id} className=" data-[hover=true]:bg-zinc-500 " textValue="Dropdown geners">
                                           <Link to={`/genre/${genre.slug}`}>
                                                 <div className="flex gap-4">
                                                       <Avatar
