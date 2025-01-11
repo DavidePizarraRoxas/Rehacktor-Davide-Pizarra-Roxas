@@ -5,7 +5,7 @@ import GameUI from "../components/NavbarUI/GameUI/GameUI";
 import ProgressBar from "../components/NavbarUI/Progress/ProgressBar";
 import DropdownMain from "../components/NavbarUI/DropDown/DropDownMain";
 import SessionContext from "../context/SessionContext";
-import { Card, CardFooter, Image, Button, CardHeader, Spinner } from "@nextui-org/react";
+import { Card, Image, Spinner } from "@nextui-org/react";
 
 export default function AppHome() {
 
@@ -55,7 +55,7 @@ export default function AppHome() {
                                     />
                               </div>
 
-                           
+
                               <div className="absolute inset-0 flex items-center justify-center z-20">
                                     <h1 className="text-gray-200 text-6xl sm:text-8xl font-extrabold text-center drop-shadow-2xl opacity-100 animate-fadeIn title-text">
                                           Welcome to Rehacktor

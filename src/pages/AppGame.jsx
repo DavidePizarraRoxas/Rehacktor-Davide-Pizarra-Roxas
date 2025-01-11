@@ -167,7 +167,7 @@ export default function AppGame() {
                                     {fav.length == 0 ?
                                           <Button isIconOnly aria-label="Like" color="danger" startContent={<HeartIcon />} onPress={() => insertIntoFav(game)}>
                                           </Button> :
-                                          <Button aria-label="Like" variant="bordered" startContent={<DeleteDocumentIcon />} onPress={() => removeFromFav(game)}>
+                                          <Button aria-label="Like-no" variant="bordered" startContent={<DeleteDocumentIcon />} onPress={() => removeFromFav(game)}>
 
                                           </Button>
                                     }

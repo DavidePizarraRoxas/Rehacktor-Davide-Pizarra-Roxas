@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Card, CardHeader, CardBody, Divider, Avatar, ScrollShadow  } from "@nextui-org/react";
-import { div } from "framer-motion/client";
+
 
 export default function Achievements({ game }) {
       const [achievements, setAchievements] = useState([]);
@@ -18,7 +18,6 @@ export default function Achievements({ game }) {
                   const json = await response.json();
                   setAchievements(json.results);
                   setLoading(false);
-                  console.log(json.results);
             }
             fetchAchievements();
       }, [game.id]);
