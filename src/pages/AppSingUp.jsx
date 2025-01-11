@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Form, Input, Button, Image } from "@nextui-org/react";
 import supabase from "../supabase/client";
 import { Toaster, toast } from 'sonner';
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 
 export const MailIcon = (props) => {
@@ -234,11 +234,19 @@ export default function AppSingUp() {
                                           type={isVisible ? "text" : "password"}
 
                                     />
-                                    <div className="mt-10 flex justify-center">
-                                          <Button type="submit" variant="bordered" color="primary">
-                                                Create Accont
-                                          </Button>
-                                          <Toaster richColors />
+                                    <div className="mt-10 ">
+                                          <div className=" flex justify-center">
+                                                <Button type="submit" variant="bordered" color="primary">
+                                                      Create Accont
+                                                </Button>
+                                                <Toaster richColors />
+                                          </div>
+                                          <div className="mt-5 flex gap-2">
+                                                <p className=" text-">You have an account ?</p>
+                                                <Link to={`/singin`} className=" underline decoration-cyan-800 font-bold text-cyan-800">
+                                                Click here
+                                                </Link>
+                                          </div>
                                     </div>
                               </div>
                         </Form>

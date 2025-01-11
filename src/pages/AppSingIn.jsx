@@ -159,8 +159,8 @@ export default function AppSingIn() {
 
                                     />
                                     <div className="mt-10 flex justify-center">
-                                          <Button type="submit" variant="bordered" color="primary" className=" w-full">
-                                                Log-In
+                                          <Button type="submit" variant="bordered" color="primary" className="ps-10 pe-10">
+                                                Login
                                           </Button>
                                           <Toaster richColors />
 
