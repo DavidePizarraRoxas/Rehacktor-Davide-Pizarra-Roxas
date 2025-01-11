@@ -172,9 +172,6 @@ export default function AppAccount() {
                                     />
 
                                     <div className=' flex justify-center'>
-                                          {/* <button className="button block primary" type="submit" disabled={loading}>
-                                                {loading ? 'Loading ...' : 'Update'}
-                                          </button> */}
                                           <Button color="primary" variant="ghost" type="submit" disabled={loading}>
                                                 {loading ? 'Loading ...' : 'Update'}
                                           </Button>

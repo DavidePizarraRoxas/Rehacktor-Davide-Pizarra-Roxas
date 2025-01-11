@@ -32,8 +32,6 @@ export default function RealtimeChat({ game }) {
                   .from("Messages")
                   .select()
                   .eq('game_id', game.id)
-            // console.log(`data`, data);
-
             setLoadingInitial(false);
             if (error) {
                   setError(error.message);
@@ -59,7 +57,6 @@ export default function RealtimeChat({ game }) {
                   )
                   .subscribe()
             return () => {
-                  // Remove supabase channel subscription by useEffect unmount
                   if (channel) {
                         supabase.removeChannel(channel);
                   }

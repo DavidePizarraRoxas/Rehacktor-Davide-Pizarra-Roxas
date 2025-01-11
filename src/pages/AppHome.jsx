@@ -43,10 +43,10 @@ export default function AppHome() {
                   <header className="flex justify-center mt-5 fadeInHeader p-5">
                         <Card isFooterBlurred className="relative w-full  h-[800px] rounded-xl shadow-xl overflow-hidden card">
 
-                              {/* Overlay con sfocatura dinamica e colore */}
+
                               <div className="absolute inset-0 bg-black bg-opacity-20 z-10"></div>
 
-                              {/* Immagine di sfondo con sfocatura e effetto zoom */}
+
                               <div className="absolute inset-0 z-0 transition-transform transform hover:scale-110">
                                     <Image
                                           alt="Image header"
@@ -55,7 +55,7 @@ export default function AppHome() {
                                     />
                               </div>
 
-                              {/* Titolo centrato sopra l'immagine con animazione di fade-in */}
+                           
                               <div className="absolute inset-0 flex items-center justify-center z-20">
                                     <h1 className="text-gray-200 text-6xl sm:text-8xl font-extrabold text-center drop-shadow-2xl opacity-100 animate-fadeIn title-text">
                                           Welcome to Rehacktor
