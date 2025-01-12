@@ -4,6 +4,7 @@ import { getAvatarUrl } from "../utils/getAvatarUrl";
 import supabase from "../supabase/client";
 import { useContext, useEffect, useState } from "react";
 import SessionContext from "../context/SessionContext";
+import { div } from "framer-motion/client";
 
 
 
@@ -33,7 +34,7 @@ export default function AppProfile() {
       const { username, first_name, last_name, avatar_url } = UseProfile();
       const session = useContext(SessionContext);
 
-      const [fav, setFav] = useState([])
+      const [favs, setFav] = useState([])
       async function readFav() {
             const { user } = session
             let { data: favourites, error } = await supabase
@@ -89,13 +90,13 @@ export default function AppProfile() {
                                           <Accordion variant="splitted">
                                                 <AccordionItem startContent={<HeartIcon className=" text-red-800 " />} aria-label="Accordion 1" title="Favourite games">
                                                       <div className="max-h-[20vh] overflow-y-auto p-5 text-white">
-                                                            {fav.length ? (
+                                                            {favs.length ? (
                                                                   <ul>
-                                                                        {fav.map(fav => (
-                                                                              <>
-                                                                                    <li key={fav.id}>{fav.game_name}</li>
+                                                                        {favs.map(fav => (
+                                                                              <div key={fav.id}>
+                                                                                    <li>{fav.game_name}</li>
                                                                                     <Divider className="my-2" />
-                                                                              </>
+                                                                              </div>
                                                                         ))}
                                                                   </ul>
                                                             ) : (

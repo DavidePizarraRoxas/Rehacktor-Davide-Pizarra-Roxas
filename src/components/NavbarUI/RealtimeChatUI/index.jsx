@@ -39,7 +39,7 @@ export default function RealtimeChat({ game }) {
             }
             setLoadingInitial(false);
             setMessages(data);
-            // scrollToBottom(); // not sure why this stopped working, meanwhile using useEffect that's listening to messages and isInitialLoad state.
+           
       };
 
       useEffect(() => {

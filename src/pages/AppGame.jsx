@@ -68,11 +68,10 @@ export default function AppGame() {
       const game = useLoaderData()
       const [loading, setLoading] = useState();
       const [fav, setFav] = useState([]);
-      console.log(game);
+
 
 
       async function readFav() {
-            const { user } = session
             let { data: favourites, error } = await supabase
                   .from('favourites')
                   .select(`*`)
@@ -318,7 +317,7 @@ export default function AppGame() {
                                                                               type="text"
                                                                               aria-label="message"
                                                                         />
-                                                                        <Button color="primary" type="submit" aria-label="Submit" className=" mt-6" >
+                                                                        <Button color="primary" type="submit" aria-label="Send" className=" mt-6" >
                                                                               Send
                                                                         </Button>
                                                                         <Toaster richColors />
