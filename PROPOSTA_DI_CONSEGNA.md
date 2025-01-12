@@ -44,4 +44,4 @@ Bass utilizzata: Supabase
 - Autenticazione utente (dati della sessione)
 
 ## Deployment:
-Rimpiazza con il link online della tua App.
+rehacktor-mu.vercel.app
