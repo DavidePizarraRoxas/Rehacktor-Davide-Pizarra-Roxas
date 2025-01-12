@@ -200,7 +200,7 @@ export default function AppGame() {
                                           <div className="p-5">
                                                 <Card className="">
                                                       <CardHeader className="flex justify-center">
-                                                            <h3 className="  text-xl text-center p-3 font-bold">Reating</h3>
+                                                            <h3 className="  text-xl text-center p-3 font-bold">Rating</h3>
                                                       </CardHeader>
                                                       <Divider />
                                                       <CardBody className=" grid grid-cols-4  p-4">
