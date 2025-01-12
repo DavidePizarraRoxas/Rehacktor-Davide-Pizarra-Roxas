@@ -200,7 +200,7 @@ export default function AppGame() {
                                           <div className="p-5">
                                                 <Card className="">
                                                       <CardHeader className="flex justify-center">
-                                                            <h3 className="  text-xl text-center p-3 font-bold">Reatings</h3>
+                                                            <h3 className="  text-xl text-center p-3 font-bold">Reating</h3>
                                                       </CardHeader>
                                                       <Divider />
                                                       <CardBody className=" grid grid-cols-4  p-4">
@@ -213,7 +213,7 @@ export default function AppGame() {
                                     </div>
                                     <div className="ps-10 pt-10 pe-10">
                                           <div className="">
-                                                <h3 className=" text-2xl text-center p-5 font-bold">Screenshoot</h3>
+                                                <h3 className=" text-2xl text-center p-5 font-bold">Screenshot</h3>
                                                 <ScreenShoot game={game} />
                                           </div>
 
@@ -222,7 +222,7 @@ export default function AppGame() {
                                                 <div className=" flex justify-center" >
                                                       <Card className="w-full  border border-default-200 bg-gradient-to-br from-white to-default-200 dark:from-default-50 dark:to-black  ">
                                                             <CardHeader className=" flex justify-center">
-                                                                  <h3 className=" text-xl text-center p-3 font-bold">Genreal Information </h3>
+                                                                  <h3 className=" text-xl text-center p-3 font-bold">General Information </h3>
                                                             </CardHeader>
                                                             <Divider />
                                                             <CardBody className=" grid grid-cols-2 gap-3">
